@@ -1,5 +1,6 @@
 var React = require('react');
-var MapNode = require('../components/MapNode');
+
+var MapRow = require('../components/MapRow');
 
 var nodeIndex = {
     dot: {
@@ -77,17 +78,11 @@ function buildMapMatrix(width, height, mapType) {
     return matrix;
 }
 
-function getMapDOM(width, height) {
-    var mapMatrix = buildMapMatrix(width, height);
+function getMapDOM(width, height, mapType) {
+    var mapMatrix = buildMapMatrix(width, height, mapType);
     return mapMatrix.map((row, rowIndex) => {
         return (
-            <div className="map-row">
-            {
-               row.map((cell, cellIndex) => {
-                   return ( <MapNode nodeObj={cell} key={"" + rowIndex + "," + cellIndex} /> ) /* TO DO: FIX MY KEY PROP */
-               }) 
-            }
-            </div>
+            <MapRow key={'row' + rowIndex} cells={row} />
         )
     })
 }
@@ -97,14 +92,14 @@ function getMapDOM(width, height) {
 var Map = React.createClass({
     getDefaultProps:function(){
         return {
-            width: 32,
-            height: 16,
+            width: 20,
+            height: 20,
         }
     },
     render: function() {
         return (
             <pre className="map">
-                { getMapDOM(this.props.width, this.props.height) }
+                { getMapDOM(this.props.width, this.props.height, this.props.mapType) }
             </pre>
         );
     }
@@ -114,7 +109,8 @@ var Map = React.createClass({
 
 Map.propTypes = {
     width: React.PropTypes.number,
-    height: React.PropTypes.number
+    height: React.PropTypes.number,
+    mapType: React.PropTypes.string.isRequired
 }
 
 module.exports = Map;
