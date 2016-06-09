@@ -1,6 +1,8 @@
 var React = require('react');
+var _ = require('lodash');
 
 var MapNode = require('../components/MapNode');
+
 
 var MapRow = React.createClass({
 
@@ -9,7 +11,10 @@ var MapRow = React.createClass({
             <div className="map-row">
             {
                this.props.cells.map((cell, cellIndex) => {
-                   return ( <MapNode nodeObj={cell} key={"" + this.key + "," + cellIndex} /> ) /* TO DO: Check this key prop */
+                    return _.isEmpty(cell) ? 
+                        ( <span key={"" + this.key + "," + cellIndex}>‧</span> )
+                    :
+                        ( <MapNode nodeObj={cell} key={"" + this.key + "," + cellIndex} /> ) /* TO DO: Check this key prop */
                }) 
             }
             </div>

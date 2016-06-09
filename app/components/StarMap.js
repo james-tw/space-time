@@ -6,7 +6,7 @@ var StarMap = React.createClass({
     render: function() {
         return (
             <div>
-                <Map width={20} height={20} mapType="circle" />
+                <Map width={31} height={21} mapType="centered" />
             </div>
         );
     }

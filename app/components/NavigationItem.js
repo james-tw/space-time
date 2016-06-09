@@ -1,11 +1,13 @@
 var React = require('react');
+import { Link } from 'react-router';
 
 var NavigationItem = React.createClass({
 
     render: function() {
         return (
             <li>
-                <a href={this.props.path}>{this.props.title}</a>
+
+                <Link to={this.props.path}>{this.props.title}</Link>
             </li>
         );
     }
